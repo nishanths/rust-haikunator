@@ -1,2 +1,6 @@
+# cargo
 target
 Cargo.lock
+
+# OS X
+.DS_Store
