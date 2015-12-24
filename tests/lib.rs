@@ -140,5 +140,6 @@ fn it_handles_zero_length_parts_without_gen_range_panic() {
     let mut h = Haikunator::default();
     h.token_length = 0;
     h.adjectives = &[];
+    h.nouns = &[];
     h.haikunate(); // no panic
 }
