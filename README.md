@@ -5,6 +5,14 @@
 
 Generate Heroku-like random names to use in your Rust applications.
 
+```
+snowy-meadow-1347
+delicate-haze-8496
+cold-wildflower-3957
+```
+
+[crates.io](https://crates.io/crates/haikunator/)
+
 ## Installation
 
 Add to your `Config.toml` dependencies
@@ -27,12 +35,12 @@ use haikunator::{Haikunator};
 fn main() {
     // normal usage
     let haikunator = Haikunator::default();    
-    println!("{}", haikunator.haikunate()); // => fancy-cloud-7181
+    println!("{}", haikunator.haikunate()); // => "fancy-cloud-7181"
 
     // custom length (default=4)
     let mut haikunator = Haikunator::default();
     haikunator.token_length = 9;
-    println!("{}", haikunator.haikunate()); // => rapid-mode-572457286
+    println!("{}", haikunator.haikunate()); // => "rapid-mode-572457286"
 
     // use hex instead of numbers
     let mut haikunator = Haikunator::default();
@@ -103,8 +111,8 @@ pub struct Haikunator<'a> {
 
 Everyone is encouraged to help improve this project. Here are a few ways you can help:
 
-- [Report bugs](https://github.com/atrox/haikunatorgo/issues)
-- Fix bugs and [submit pull requests](https://github.com/atrox/haikunatorgo/pulls)
+- [Report bugs](https://github.com/nishanths/rust-haikunator/issues)
+- Fix bugs and [submit pull requests](https://github.com/nishanths/rust-haikunator/pulls)
 - Write, clarify, or fix documentation
 - Suggest or add new features
 
@@ -112,6 +120,7 @@ Everyone is encouraged to help improve this project. Here are a few ways you can
 
 Haikunator is also available in other languages. Check them out:
 
+- Go: <https://github.com/Atrox/haikunatorgo>
 - Node: <https://github.com/Atrox/haikunatorjs>
 - .NET: <https://github.com/Atrox/haikunator.net>
 - Python: <https://github.com/Atrox/haikunatorpy>
