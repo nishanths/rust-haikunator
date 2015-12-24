@@ -3,7 +3,7 @@ extern crate rand;
 use rand::{thread_rng, Rng};
 
 // Default adjectives
-const ADJECTIVES: &'static [&'static str] = &[
+pub const DEFAULT_ADJECTIVES: &'static [&'static str] = &[
     "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
     "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
     "patient", "twilight", "dawn", "crimson", "wispy", "weathered", "blue",
@@ -19,7 +19,7 @@ const ADJECTIVES: &'static [&'static str] = &[
 ];
 
 // Default nouns
-const NOUNS: &'static [&'static str] = &[
+pub const DEFAULT_NOUNS: &'static [&'static str] = &[
     "waterfall", "river", "breeze", "moon", "rain", "wind", "sea", "morning",
     "snow", "lake", "sunset", "pine", "shadow", "leaf", "dawn", "glitter",
     "forest", "hill", "cloud", "meadow", "sun", "glade", "bird", "brook",
@@ -44,17 +44,18 @@ const NOUNS: &'static [&'static str] = &[
 /// use haikunator::Haikunator;
 /// 
 /// let h = Haikunator {
-///     adjectives: ["flying", "bubbly"],
-///     nouns: ["bat", "soda"],
+///     adjectives: &["flying", "bubbly"],
+///     nouns: &["bat", "soda"],
 ///     delimiter: "-",
 ///     token_length: 8,
 ///     token_hex: false,
 ///     token_chars: "0123456789忠犬ハチ公"
 /// };
-/// println!("{:?}", h.haikunate());
+///
 /// ```
 ///
 /// **Note**: If `token_hex` is true, the value of `token_chars` is ignored.
+#[derive(Debug)]
 pub struct Haikunator<'a> {
     pub adjectives: &'a [&'a str],
     pub nouns: &'a [&'a str],
@@ -76,8 +77,8 @@ impl<'a> Default for Haikunator<'a> {
     /// ```
     fn default() -> Self {
         Haikunator {
-            adjectives: ADJECTIVES,
-            nouns: NOUNS,
+            adjectives: DEFAULT_ADJECTIVES,
+            nouns: DEFAULT_NOUNS,
             delimiter: "-",
             token_length: 4,
             token_hex: false,
@@ -100,23 +101,42 @@ impl<'a> Haikunator<'a> {
     /// ```
     pub fn haikunate(&self) -> String {
         // determine tokens to use
-        let mut tokens = self.token_chars;
+        let tokens;
+
         if self.token_hex {
             tokens = "0123456789abcdef";
+        } else {
+            tokens = self.token_chars;
         }
 
         let mut rng = thread_rng();
 
         // pick adjective and noun
-        let adjective = self.adjectives[rng.gen_range(0, self.adjectives.len())];
-        let noun = self.nouns[rng.gen_range(0, self.nouns.len())];
+        let adjective;
+        let noun;
+
+        // avoid panic when low >= high in gen_range
+        if self.adjectives.len() > 0{
+            adjective = self.adjectives[rng.gen_range(0, self.adjectives.len())];
+        } else {
+            adjective = "";
+        }
+
+        if self.nouns.len() > 0 {
+            noun = self.nouns[rng.gen_range(0, self.nouns.len())];
+        } else {
+            noun = "";
+        }
         
         // create token
         let mut token = String::with_capacity(self.token_length);
         let count = tokens.chars().count();
-        for _ in 0..self.token_length {
-            let index = rng.gen_range(0, count);
-            token.push(tokens.chars().nth(index).unwrap());
+        
+        if count > 0 {
+            for _ in 0..self.token_length {
+                let index = rng.gen_range(0, count);
+                token.push(tokens.chars().nth(index).unwrap());
+            }
         }
 
         // create and return result
