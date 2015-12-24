@@ -5,7 +5,7 @@ authors = ["Nishanth Shanmugham <nishanth.gerrard@gmail.com>"]
 
 # A short blurb about the package. This is not rendered in any format when
 # uploaded to crates.io (aka this is not markdown)
-description = "Generate Heroku-like random names to use in your rust applications."
+description = "Generate Heroku-like random names to use in your Rust applications"
 
 # These URLs point to more information about the repository
 documentation = "https://github.com/nishanths/rust-haikunator"
