@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Rust-haikunator by nishanths</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Rust-haikunator</h1>
+      <h2 class="project-tagline">Generate Heroku-like random names to use in your Rust applications</h2>
+      <a href="https://github.com/nishanths/rust-haikunator" class="btn">View on GitHub</a>
+      <a href="https://github.com/nishanths/rust-haikunator/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/nishanths/rust-haikunator/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="rust-haikunator" class="anchor" href="#rust-haikunator" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://github.com/nishanths/rust-haikunator">rust-haikunator</a>
+</h1>
+
+<p><a href="https://travis-ci.org/nishanths/rust-haikunator"><img src="https://travis-ci.org/nishanths/rust-haikunator.svg?branch=master" alt="Build Status"></a>
+<a href="https://coveralls.io/github/nishanths/rust-haikunator?branch=master"><img src="https://coveralls.io/repos/nishanths/rust-haikunator/badge.svg?branch=master&amp;service=github" alt="Coverage Status"></a></p>
+
+<p>Generate Heroku-like random names to use in your Rust applications.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add to your <code>Config.toml</code> dependencies</p>
+
+<div class="highlight highlight-source-toml"><pre>[<span class="pl-en">dependencies</span>]
+
+<span class="pl-smi">haikunator</span> = <span class="pl-s"><span class="pl-pds">"</span>0.1.0<span class="pl-pds">"</span></span></pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Include the crate; create a <code>Haikunator</code> instance; then call <code>haikunate</code>.</p>
+
+<div class="highlight highlight-source-rust"><pre><span class="pl-k">extern</span> <span class="pl-k">crate</span> haikunator<span class="pl-k">;</span>
+
+<span class="pl-k">use</span> haikunator<span class="pl-k">::</span>{<span class="pl-k">Haikunator</span>}<span class="pl-k">;</span>
+
+<span class="pl-k">fn</span> <span class="pl-en">main</span>() {
+    <span class="pl-c">// normal usage</span>
+    <span class="pl-k">let</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span><span class="pl-k">::</span><span class="pl-c1">default</span>()<span class="pl-k">;</span>    
+    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; fancy-cloud-7181</span>
+
+    <span class="pl-c">// custom length (default=4)</span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span><span class="pl-k">::</span><span class="pl-c1">default</span>()<span class="pl-k">;</span>
+    haikunator<span class="pl-k">.</span>token_length <span class="pl-k">=</span> <span class="pl-c1">9</span><span class="pl-k">;</span>
+    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; rapid-mode-572457286</span>
+
+    <span class="pl-c">// use hex instead of numbers</span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span><span class="pl-k">::</span><span class="pl-c1">default</span>()<span class="pl-k">;</span>
+    haikunator<span class="pl-k">.</span>token_hex <span class="pl-k">=</span> <span class="pl-c1">true</span><span class="pl-k">;</span>
+    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; "misty-boat-bd01"</span>
+
+    <span class="pl-c">// use custom chars instead of numbers/hex</span>
+    <span class="pl-c">// unicode works too</span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span><span class="pl-k">::</span><span class="pl-c1">default</span>()<span class="pl-k">;</span>
+    haikunator<span class="pl-k">.</span>token_chars <span class="pl-k">=</span> <span class="pl-s">"HAIKUNATE忠犬ハチ公"</span><span class="pl-k">;</span>
+    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; "divine-tiger-NKKチ"</span>
+
+    <span class="pl-c">// don't include a token</span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span><span class="pl-k">::</span><span class="pl-c1">default</span>()<span class="pl-k">;</span>
+    haikunator<span class="pl-k">.</span>token_length <span class="pl-k">=</span> <span class="pl-c1">0</span><span class="pl-k">;</span>
+    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; "lingering-term"</span>
+
+    <span class="pl-c">// use a different delimiter</span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span><span class="pl-k">::</span><span class="pl-c1">default</span>()<span class="pl-k">;</span>
+    haikunator<span class="pl-k">.</span>delimiter <span class="pl-k">=</span> <span class="pl-s">":"</span><span class="pl-k">;</span>
+    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; "young:cell:5426"</span>
+
+    <span class="pl-c">// no token, space delimiter</span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span><span class="pl-k">::</span><span class="pl-c1">default</span>()<span class="pl-k">;</span>
+    haikunator<span class="pl-k">.</span>token_length <span class="pl-k">=</span> <span class="pl-c1">0</span><span class="pl-k">;</span>
+    haikunator<span class="pl-k">.</span>delimiter <span class="pl-k">=</span> <span class="pl-s">" "</span><span class="pl-k">;</span>
+    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; "wandering coke"</span>
+
+    <span class="pl-c">// no token, empty delimiter</span>
+    <span class="pl-k">let</span> <span class="pl-k">mut</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span><span class="pl-k">::</span><span class="pl-c1">default</span>()<span class="pl-k">;</span>
+    haikunator<span class="pl-k">.</span>token_length <span class="pl-k">=</span> <span class="pl-c1">0</span><span class="pl-k">;</span>
+    haikunator<span class="pl-k">.</span>delimiter <span class="pl-k">=</span> <span class="pl-s">""</span><span class="pl-k">;</span>
+    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; "freetooth"</span>
+
+    <span class="pl-c">// custom nouns and/or adjectives</span>
+    <span class="pl-k">let</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span> {
+        adjectives<span class="pl-k">:</span> <span class="pl-k">&amp;</span>[<span class="pl-s">"dandy"</span><span class="pl-k">,</span> <span class="pl-s">"froody"</span><span class="pl-k">,</span> <span class="pl-s">"happy"</span>]<span class="pl-k">,</span>
+        nouns<span class="pl-k">:</span> <span class="pl-k">&amp;</span>[<span class="pl-s">"whale"</span><span class="pl-k">,</span> <span class="pl-s">"towel"</span><span class="pl-k">,</span> <span class="pl-s">"earth"</span>]<span class="pl-k">,</span>
+        delimiter<span class="pl-k">:</span> <span class="pl-s">"-"</span><span class="pl-k">,</span>
+        token_length<span class="pl-k">:</span> <span class="pl-c1">3</span><span class="pl-k">,</span>
+        token_hex<span class="pl-k">:</span> <span class="pl-c1">false</span><span class="pl-k">,</span>
+        token_chars<span class="pl-k">:</span> <span class="pl-s">"24"</span><span class="pl-k">,</span>
+    }<span class="pl-k">;</span>
+    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; "happy-earth-444"</span>
+}</pre></div>
+
+<p>See the test files at <a href="https://github.com/nishanths/rust-haikunator/blob/master/tests/lib.rs"><code>tests/lib.rs</code></a> for more examples.</p>
+
+<h2>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Options</h2>
+
+<p>The following options are available:</p>
+
+<div class="highlight highlight-source-rust"><pre><span class="pl-k">pub</span> <span class="pl-k">struct</span> <span class="pl-k">Haikunator</span><span class="pl-k">&lt;</span><span class="pl-k">'a</span><span class="pl-k">&gt;</span> {
+    <span class="pl-k">pub</span> adjectives<span class="pl-k">:</span> <span class="pl-k">&amp;</span><span class="pl-k">'a</span> [<span class="pl-k">&amp;</span><span class="pl-k">'a</span> <span class="pl-k">str</span>]<span class="pl-k">,</span>
+    <span class="pl-k">pub</span> nouns<span class="pl-k">:</span> <span class="pl-k">&amp;</span><span class="pl-k">'a</span> [<span class="pl-k">&amp;</span><span class="pl-k">'a</span> <span class="pl-k">str</span>]<span class="pl-k">,</span>
+    <span class="pl-k">pub</span> delimiter<span class="pl-k">:</span> <span class="pl-k">&amp;</span><span class="pl-k">'a</span> <span class="pl-k">str</span><span class="pl-k">,</span>
+    <span class="pl-k">pub</span> token_length<span class="pl-k">:</span> <span class="pl-k">usize</span><span class="pl-k">,</span>
+    <span class="pl-k">pub</span> token_hex<span class="pl-k">:</span> <span class="pl-k">bool</span><span class="pl-k">,</span>
+    <span class="pl-k">pub</span> token_chars<span class="pl-k">:</span> <span class="pl-k">&amp;</span><span class="pl-k">'a</span> <span class="pl-k">str</span><span class="pl-k">,</span>
+}</pre></div>
+
+<p><strong>Note</strong>: If <code>token_hex</code> is true, the value of <code>token_chars</code> is ignored.</p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Everyone is encouraged to help improve this project. Here are a few ways you can help:</p>
+
+<ul>
+<li><a href="https://github.com/atrox/haikunatorgo/issues">Report bugs</a></li>
+<li>Fix bugs and <a href="https://github.com/atrox/haikunatorgo/pulls">submit pull requests</a>
+</li>
+<li>Write, clarify, or fix documentation</li>
+<li>Suggest or add new features</li>
+</ul>
+
+<h2>
+<a id="other-languages" class="anchor" href="#other-languages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other Languages</h2>
+
+<p>Haikunator is also available in other languages. Check them out:</p>
+
+<ul>
+<li>Node: <a href="https://github.com/Atrox/haikunatorjs">https://github.com/Atrox/haikunatorjs</a>
+</li>
+<li>.NET: <a href="https://github.com/Atrox/haikunator.net">https://github.com/Atrox/haikunator.net</a>
+</li>
+<li>Python: <a href="https://github.com/Atrox/haikunatorpy">https://github.com/Atrox/haikunatorpy</a>
+</li>
+<li>PHP: <a href="https://github.com/Atrox/haikunatorphp">https://github.com/Atrox/haikunatorphp</a>
+</li>
+<li>Java: <a href="https://github.com/Atrox/haikunatorjava">https://github.com/Atrox/haikunatorjava</a>
+</li>
+<li>Dart: <a href="https://github.com/Atrox/haikunatordart">https://github.com/Atrox/haikunatordart</a>
+</li>
+<li>Ruby: <a href="https://github.com/usmanbashir/haikunator">https://github.com/usmanbashir/haikunator</a>
+</li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>rust-haikunator is available under the <a href="https://github.com/nishanths/rust-haikunator/blob/master/LICENSE">MIT License</a>.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/nishanths/rust-haikunator">Rust-haikunator</a> is maintained by <a href="https://github.com/nishanths">nishanths</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
