@@ -2,6 +2,7 @@ extern crate rand;
 
 use rand::{thread_rng, Rng};
 
+// Default adjectives
 const ADJECTIVES: &'static [&'static str] = &[
     "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
     "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
@@ -17,6 +18,7 @@ const ADJECTIVES: &'static [&'static str] = &[
     "shrill", "rapid", "sweet", "curly", "calm", "jolly", "fancy", "plain", "shinny"
 ];
 
+// Default nouns
 const NOUNS: &'static [&'static str] = &[
     "waterfall", "river", "breeze", "moon", "rain", "wind", "sea", "morning",
     "snow", "lake", "sunset", "pine", "shadow", "leaf", "dawn", "glitter",
@@ -33,6 +35,26 @@ const NOUNS: &'static [&'static str] = &[
     "penguin", "kiwi", "cake", "mouse", "rice", "coke", "hola", "salad", "hat"
 ];
 
+/// The `Haikunator` type
+/// Holds settings and data that will be used when `haikunate` is called.
+/// 
+/// # Examples
+/// 
+/// ```
+/// use haikunator::Haikunator;
+/// 
+/// let h = Haikunator {
+///     adjectives: ["flying", "bubbly"],
+///     nouns: ["bat", "soda"],
+///     delimiter: "-",
+///     token_length: 8,
+///     token_hex: false,
+///     token_chars: "0123456789忠犬ハチ公"
+/// };
+/// println!("{:?}", h.haikunate());
+/// ```
+///
+/// **Note**: If `token_hex` is true, the value of `token_chars` is ignored.
 pub struct Haikunator<'a> {
     pub adjectives: &'a [&'a str],
     pub nouns: &'a [&'a str],
@@ -43,6 +65,15 @@ pub struct Haikunator<'a> {
 }
 
 impl<'a> Default for Haikunator<'a> {
+    /// Constructs a new Haikunator with default values.
+    ///
+    /// # Examples
+    /// 
+    /// ```
+    /// use haikunator::Haikunator;
+    /// 
+    /// let h = Haikunator::default();
+    /// ```
     fn default() -> Self {
         Haikunator {
             adjectives: ADJECTIVES,
@@ -56,6 +87,17 @@ impl<'a> Default for Haikunator<'a> {
 }
 
 impl<'a> Haikunator<'a> {
+    /// Generates random heroku-like short names using a combination 
+    // of adjective, noun, and the delimiter.
+    /// 
+    /// # Examples
+    /// 
+    /// ```
+    /// use haikunator::Haikunator;
+    /// 
+    /// let h = Haikunator::default();
+    /// println!("{:?}", h.haikunate());
+    /// ```
     pub fn haikunate(&self) -> String {
         // determine tokens to use
         let mut tokens = self.token_chars;
