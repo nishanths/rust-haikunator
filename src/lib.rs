@@ -1,7 +1,6 @@
 extern crate rand;
-extern crate time;
 
-use rand::{Rng, SeedableRng, StdRng};
+use rand::{thread_rng, Rng};
 
 const ADJECTIVES: &'static [&'static str] = &[
     "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
@@ -41,7 +40,6 @@ pub struct Haikunator<'a> {
     pub token_length: usize,
     pub token_hex: bool,
     pub token_chars: &'a str,
-    pub random: Option<&'a StdRng>,
 }
 
 impl<'a> Default for Haikunator<'a> {
@@ -53,7 +51,6 @@ impl<'a> Default for Haikunator<'a> {
             token_length: 4,
             token_hex: false,
             token_chars: "0123456789",
-            random: None
         }
     }
 }
@@ -66,16 +63,18 @@ impl<'a> Haikunator<'a> {
             tokens = "0123456789abcdef";
         }
 
-        // TODO pick randomly
+        let mut rng = thread_rng();
 
         // pick adjective and noun
-        let adjective: &str = "hello";
-        let noun: &str = "me";
+        let adjective = self.adjectives[rng.gen_range(0, self.adjectives.len())];
+        let noun = self.nouns[rng.gen_range(0, self.nouns.len())];
         
         // create token
         let mut token = String::with_capacity(self.token_length);
-        for x in 0..self.token_length {
-            token.push(tokens.chars().nth(x).unwrap())
+        let count = tokens.chars().count();
+        for _ in 0..self.token_length {
+            let index = rng.gen_range(0, count);
+            token.push(tokens.chars().nth(index).unwrap());
         }
 
         // create and return result

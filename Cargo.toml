@@ -3,6 +3,28 @@ name = "haikunator"
 version = "0.1.0"
 authors = ["Nishanth Shanmugham <nishanth.gerrard@gmail.com>"]
 
+# A short blurb about the package. This is not rendered in any format when
+# uploaded to crates.io (aka this is not markdown)
+description = "Generate Heroku-like random names to use in your rust applications."
+
+# These URLs point to more information about the repository
+documentation = "https://github.com/nishanths/rust-haikunator"
+homepage = "https://github.com/nishanths/rust-haikunator"
+repository = "https://github.com/nishanths/rust-haikunator"
+
+# This points to a file in the repository (relative to this Cargo.toml). The
+# contents of this file are stored and indexed in the registry.
+readme = "README.md"
+
+# This is a small list of keywords used to categorize and search for this
+# package.
+keywords = ["heroku", "haiku", "unique names", "short names", "random names"]
+
+# This is a string description of the license for this package. Currently
+# crates.io will validate the license provided against a whitelist of known
+# license identifiers from http://spdx.org/licenses/. Multiple licenses can
+# be separated with a `/`
+license = "MIT"
+
 [dependencies]
 rand = "0.3.0"
-time = "0.1"
