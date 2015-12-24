@@ -9,7 +9,7 @@ description = "Generate Heroku-like random names to use in your Rust application
 
 # These URLs point to more information about the repository
 documentation = "https://github.com/nishanths/rust-haikunator"
-homepage = "https://github.com/nishanths/rust-haikunator"
+homepage = "https://nishanths.github.io/rust-haikunator"
 repository = "https://github.com/nishanths/rust-haikunator"
 
 # This points to a file in the repository (relative to this Cargo.toml). The
@@ -18,7 +18,7 @@ readme = "README.md"
 
 # This is a small list of keywords used to categorize and search for this
 # package.
-keywords = ["heroku", "haiku", "unique names", "short names", "random names"]
+keywords = ["heroku", "haiku", "unique-name", "short-name", "random-name"]
 
 # This is a string description of the license for this package. Currently
 # crates.io will validate the license provided against a whitelist of known
