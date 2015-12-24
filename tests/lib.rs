@@ -5,12 +5,12 @@ use haikunator::{Haikunator,DEFAULT_ADJECTIVES,DEFAULT_NOUNS};
 use regex::Regex;
 
 #[test]
-fn it_returns_4_digits_token() {  
+fn it_returns_4_digits_token() {
     let h = Haikunator::default();
     let name = h.haikunate();
 
     let re = Regex::new(r"^\w+-\w+-[0123456789]{4}$").unwrap();
-    
+
     assert!(re.is_match(&name));
 }
 
@@ -19,12 +19,12 @@ fn it_does_not_return_the_same_name() {
     let h = Haikunator::default();
     let name1 = h.haikunate();
     let name2 = h.haikunate();
-    
+
     assert!(!(&name1 == &name2));
 }
 
 #[test]
-fn it_uses_custom_delimiter() {   
+fn it_uses_custom_delimiter() {
     let mut h = Haikunator::default();
     h.delimiter = "@";
     let name = h.haikunate();

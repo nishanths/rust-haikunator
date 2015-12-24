@@ -37,12 +37,12 @@ pub const DEFAULT_NOUNS: &'static [&'static str] = &[
 
 /// The `Haikunator` type
 /// Holds settings and data that will be used when `haikunate` is called.
-/// 
+///
 /// # Examples
-/// 
+///
 /// ```
 /// use haikunator::Haikunator;
-/// 
+///
 /// let h = Haikunator {
 ///     adjectives: &["flying", "bubbly"],
 ///     nouns: &["bat", "soda"],
@@ -69,10 +69,10 @@ impl<'a> Default for Haikunator<'a> {
     /// Constructs a new Haikunator with default values.
     ///
     /// # Examples
-    /// 
+    ///
     /// ```
     /// use haikunator::Haikunator;
-    /// 
+    ///
     /// let h = Haikunator::default();
     /// ```
     fn default() -> Self {
@@ -88,14 +88,14 @@ impl<'a> Default for Haikunator<'a> {
 }
 
 impl<'a> Haikunator<'a> {
-    /// Generates random heroku-like short names using a combination 
+    /// Generates random heroku-like short names using a combination
     // of adjective, noun, and the delimiter.
-    /// 
+    ///
     /// # Examples
-    /// 
+    ///
     /// ```
     /// use haikunator::Haikunator;
-    /// 
+    ///
     /// let h = Haikunator::default();
     /// println!("{:?}", h.haikunate());
     /// ```
@@ -127,11 +127,11 @@ impl<'a> Haikunator<'a> {
         } else {
             noun = "";
         }
-        
+
         // create token
         let mut token = String::with_capacity(self.token_length);
         let count = tokens.chars().count();
-        
+
         if count > 0 {
             for _ in 0..self.token_length {
                 let index = rng.gen_range(0, count);
