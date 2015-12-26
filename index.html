@@ -56,12 +56,12 @@ cold-wildflower-3957
 <span class="pl-k">fn</span> <span class="pl-en">main</span>() {
     <span class="pl-c">// normal usage</span>
     <span class="pl-k">let</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span><span class="pl-k">::</span><span class="pl-c1">default</span>()<span class="pl-k">;</span>    
-    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; fancy-cloud-7181</span>
+    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; "fancy-cloud-7181"</span>
 
     <span class="pl-c">// custom length (default=4)</span>
     <span class="pl-k">let</span> <span class="pl-k">mut</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span><span class="pl-k">::</span><span class="pl-c1">default</span>()<span class="pl-k">;</span>
     haikunator<span class="pl-k">.</span>token_length <span class="pl-k">=</span> <span class="pl-c1">9</span><span class="pl-k">;</span>
-    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; rapid-mode-572457286</span>
+    println<span class="pl-k">!</span>(<span class="pl-s">"{}"</span><span class="pl-k">,</span> haikunator<span class="pl-k">.</span><span class="pl-c1">haikunate</span>())<span class="pl-k">;</span> <span class="pl-c">// =&gt; "rapid-mode-572457286"</span>
 
     <span class="pl-c">// use hex instead of numbers</span>
     <span class="pl-k">let</span> <span class="pl-k">mut</span> haikunator <span class="pl-k">=</span> <span class="pl-k">Haikunator</span><span class="pl-k">::</span><span class="pl-c1">default</span>()<span class="pl-k">;</span>
