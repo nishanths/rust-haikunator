@@ -128,6 +128,7 @@ Haikunator is also available in other languages. Check them out:
 - Java: <https://github.com/Atrox/haikunatorjava>
 - Dart: <https://github.com/Atrox/haikunatordart>
 - Ruby: <https://github.com/usmanbashir/haikunator>
+- R: <https://github.com/amrrs/haikunator>
 
 ## License
 
