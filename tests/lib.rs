@@ -1,7 +1,4 @@
-extern crate haikunator;
-extern crate regex;
-
-use haikunator::{Haikunator,DEFAULT_ADJECTIVES,DEFAULT_NOUNS};
+use haikunator::Haikunator;
 use regex::Regex;
 
 #[test]
@@ -37,12 +34,11 @@ fn it_uses_custom_delimiter() {
 #[test]
 fn it_returns_4_digits_hex_token() {
     let h = Haikunator {
-        adjectives: DEFAULT_ADJECTIVES,
-        nouns: DEFAULT_NOUNS,
         delimiter: "-",
         token_length: 4,
         token_hex: true,
-        token_chars: "overriden by token_hex=true"
+        token_chars: "overriden by token_hex=true",
+        ..Default::default()
     };
 
     let re = Regex::new(r"^\w+-\w+-[0123456789abcdef]{4}$").unwrap();
@@ -60,7 +56,7 @@ fn it_uses_custom_adj_noun() {
         delimiter: "-",
         token_length: 4,
         token_hex: false,
-        token_chars: "123"
+        token_chars: "123",
     };
 
     let name = h.haikunate();
@@ -78,7 +74,7 @@ fn it_returns_10_count_tokens() {
         delimiter: "-",
         token_length: 10,
         token_hex: false,
-        token_chars: "0123456789忠犬ハチ公"
+        token_chars: "0123456789忠犬ハチ公",
     };
 
     let re = Regex::new(r"^\w+-\w+-[0123456789忠犬ハチ公]{10}$").unwrap();
@@ -100,7 +96,6 @@ fn it_drops_token_if_length_is_0() {
     }
 }
 
-
 #[test]
 fn it_permits_custom_token_chars() {
     let mut h = Haikunator::default();
@@ -117,12 +112,11 @@ fn it_permits_custom_token_chars() {
 #[test]
 fn it_supports_unicode_codepoints() {
     let h = Haikunator {
-        adjectives: DEFAULT_ADJECTIVES,
-        nouns: DEFAULT_NOUNS,
         delimiter: "-",
         token_length: 5,
         token_hex: false,
-        token_chars: "忠犬ハチ公"
+        token_chars: "忠犬ハチ公",
+        ..Default::default()
     };
 
     let re = Regex::new(r"^\w+-\w+-[0123456789忠犬ハチ公]{5}$").unwrap();

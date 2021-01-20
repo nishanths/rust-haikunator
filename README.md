@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/nishanths/rust-haikunator.svg?branch=master)](https://travis-ci.org/nishanths/rust-haikunator)
 [![Coverage Status](https://coveralls.io/repos/nishanths/rust-haikunator/badge.svg?branch=master&service=github)](https://coveralls.io/github/nishanths/rust-haikunator?branch=master)
+[![Docs](https://docs.rs/haikunator/badge.svg)](https://docs.rs/haikunator)
 
 Generate Heroku-like random names to use in your Rust applications.
 

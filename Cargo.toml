@@ -1,7 +1,8 @@
 [package]
 name = "haikunator"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["Nishanth Shanmugham <nishanth.gerrard@gmail.com>"]
+edition = "2018"
 
 # A short blurb about the package. This is not rendered in any format when
 # uploaded to crates.io (aka this is not markdown)
@@ -27,10 +28,7 @@ keywords = ["heroku", "haiku", "unique-name", "short-name", "random-name"]
 license = "MIT"
 
 [dependencies]
-rand = "0.3.0"
+rand = "0.8.2"
 
 [dev-dependencies]
-regex = "0.1.8"
-
-[features]
-nightly = []
+regex = "1.4.3"
